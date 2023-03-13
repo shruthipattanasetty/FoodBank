@@ -1,0 +1,90 @@
+.container {
+    position: fixed;
+    right: 2.5%;
+    bottom: 60%;
+    margin-bottom: 10px;
+    max-width: 270px;
+    padding: 10px;
+    background-color: rgba(237, 238, 239, 0.381);
+  }
+
+  body, html {
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: darkslategrey;
+  }
+
+  * {
+    box-sizing: border-box;
+
+  }
+
+
+  /* Full-width input fields */
+input[type=text], input[type=text] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: #04AA6D;
+    background: #f1f1f1;
+  }
+
+  input[type=text]:focus, input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  /* Set a style for the submit button */
+  .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    opacity: 0.9;
+    height: 50px;
+  }
+
+  .btn:hover {
+    opacity: 1;
+  }
+
+button, select {
+    text-transform: none;
+    width: 200px;
+}
+.table .w3-table-all  {
+    border: 8px solid #ccc;
+    border-spacing: 10px;
+    width: 100%;
+    display: inline-table;
+    overflow-y: scroll;
+}
+
+.table{
+    position: fixed;
+    width: 60%;
+    margin-left: 15%;
+    border: rgb(0, 0, 0);
+    Overflow-x:scroll
+    Overflow-y:scroll
+    /* border-width: 10px; */
+}
+
+.welcome{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    /* margin-bottom: 80%; */
+    color: bisque;
+}
+
+.wel{
+    position: absolute;
+    display: inline-block;
+    margin-left: 40%;
+    margin-bottom: 80%;
+    color: rgb(0, 0, 0);
+}

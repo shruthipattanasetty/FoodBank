@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+
+}
+
+body {
+  padding-top: 5rem;
+  background-color: #f5f5f5;
+  background: url("images/food1.jpg") no-repeat top left;
+  background-size: 100%;
+  background-image: url("food1.jpg");
+}
+.form-signup {
+  max-width: 25rem;
+  margin: auto;
+  margin-top: 0.1%;
+  margin-left: 15%;
+}
+.form-signin {
+  max-width: 25rem;
+  margin: auto;
+  margin-top: 0.1%;
+  margin-left: 60%;
+}
+.form-field {
+  display: flex;
+}
+
+.form-group {
+  width: 80%;
+}

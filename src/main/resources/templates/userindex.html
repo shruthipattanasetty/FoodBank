@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Volunteer Page</title>
+
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/userindex.css}" rel="stylesheet"/>
+
+</head>
+<!-- ----------- -->
+<title>W3.JS</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<!-- //------- -->
+
+
+<body style="overflow-y: scroll">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-mynav">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Volunteer Page</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fname" th:text="${user.firstName} + ' ' + ${user.lastName}" role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid p-3" th:field="*{user}">
+    <div class="card1">
+        <img class="p-2" th:src="@{/assets/foodbox.png}" id="avatar" width="200">
+
+        <div class="card-body">
+            <p class="card-text" id="username" th:text="${user.firstName} + ' ' + ${user.lastName}">...</p>
+        </div>
+        <div class="wel">
+            <h2 style="margin: auto;color: brown;">Welcome</h2>
+            <img src="https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6kh...SJrhFPmB...FwXs1M3EMoAJtlicohPRu9fg+ "
+                 class="max-width-100" width="350" height="150">
+        </div>
+    </div>
+    <div class="bg-img">
+
+        <form class="container" th:action="@{/foods-search-th/}+${user.id}" method="POST">
+            <h4>welcome</h4>
+            <label><b>Enter zipcode</b></label>
+            <input type="text" id="zip" th:field="*{food.zipcode}" size="20" required>
+
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+</div>
+
+<h2 class="welcome">Food list</h2>
+
+<div class="table">
+    <table id="id01" class="w3-table-all">
+        <tr>
+            <th>ID</th>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Address</th>
+            <th>Zipcode</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Picking Date</th>
+
+
+            <th>Action</th>
+        </tr>
+
+
+
+        <tr th:each="food: ${foods}" style="height: 10px !important; overflow-y: scroll">
+            <td th:text="${food.id}">{{id}}</td>
+            <td th:text="${food.name}">{{name}}</td>
+            <td th:text="${food.quantity}">{{quantity}}</td>
+            <td th:text="${food.address}">{{address}}</td>
+            <td th:text="${food.zipcode}">{{zipcode}}</td>
+            <td th:text="${food.status}">{{createdOn}}</td>
+            <td th:text="${food.createdOn}">{{id}}</td>
+            <td th:text="${food.blockedOn}">{{id}}</td>
+
+            <td>
+                <a th:href="@{/foods-pick-th/}+${food.id}+'/'+${user.id}"  method="GET">pick</a>
+            </td>
+        </tr>
+    </table>
+    <h1 style="color:blue;" th:if="${foodDto != null }" th:text="${foodDto.message} ?: ''"/>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+
+
+</body>
+
+</html>

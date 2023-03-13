@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Restaurant Page</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/addFood.css}" rel="stylesheet"/>
+
+</head>
+<!-- ----------- -->
+<title>W3.JS</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<!-- //------- -->
+
+
+<body style="overflow-y: scroll">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-mynav">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Restaurant Page</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fname" th:text="${user.firstName}" role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid p-3">
+
+    <div class="food-card">
+        <form class="update-container" action="#" th:action="@{/update/}+${user.id}+'/'+${food.id}" th:object="${food}" method="post">
+            <h4>Update Food</h4>
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+            <label for="name">Quantity</label>
+            <input type="text" th:field="*{quantity}" id="quantity" placeholder="Quantity">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            <input type="submit" value="Update food">
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

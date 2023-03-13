@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Serve Food</title>
+    <link th:href="@{/css/signup.css}" rel="stylesheet"/>
+</head>
+
+<body class="text-center">
+<main class="form-signup">
+    <form  th:action="@{/user/register-th}"  method="post" >
+        <img class="mb-4" src="#" alt="" height="100">
+        <h4 class="h3 mb-3 fw-normal"><b>Registration-Form</b></h4>
+        <div class="form-field">
+            <div class="form-group">
+                <label></label>
+                <input type="text" class="form-control" id="firstname" th:field="*{user.firstName}"
+                       placeholder="Firstname" pattern="^[a-zA-Z]+"
+                       title="Please use letters only " required/>
+            </div>
+            <div class="form-group">
+                <label></label>
+                <input type="text" class="form-control" id="lastname" th:field="*{user.lastName}" placeholder="Lastname"
+                       pattern="^[a-zA-Z]+"
+                       title="Please use only letters " required/> <br>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label></label><strong>Email Address</strong>
+            <input type="email" class="form-control" id="username" th:field="*{user.email}"
+                   placeholder="name@example.com" required/> <br>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" id="password" th:field="*{user.password}" placeholder="Password"
+                   required/>
+            <label></label>
+        </div>
+        <div class="form-group">
+            <input type="text" list="browsers" class="form-control" id="usertype" th:field="*{user.userType}"
+                   placeholder="User-type" required/>
+            <datalist id="browsers">
+                <option value="RESTAURANT">
+                <option value="VOLUNTEER">
+                    <label></label>
+            </datalist>
+        </div>
+
+        <div class="form-group">
+            <label></label><strong>Address</strong>
+            <input type="text" class="form-control " id="address" th:field="*{address.addressone}"
+                   placeholder="Street Address"> <br>
+            <input type="text" class="form-control " id="city" th:field="*{address.city}" placeholder="City"
+                   pattern="^[a-zA-Z]+"
+                   title="Please start city name with a letter from a-z "><br>
+            <input type="text" class="form-control" min="5" maxlength="5" id="zipcode" th:field="*{address.zipcode}"
+                   placeholder="Zipcode" pattern="\d{5}" title="five digits only" required/>
+        </div>
+
+        <div class="form-group">
+            <label></label>
+            <input type="tel" class="form-control" name="tel" min="10" maxlength="10" id="telID"
+                   placeholder="Phone number" pattern="\d{10}" title="ten digits only" required/><br>
+        </div>
+        <td th:text="${userDto.message} ?: ''"/>
+
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign Up</button>
+        <p class="mt-5 mb-3 text-muted"></p><a th:href="@{/}">Signin here</a></p>
+    </form>
+</main>
+<!--<main class="form-signin">-->
+<!--    <form th:action="@{/user/register-th}" method="post">-->
+<!--        <img class="mb-4" src="#" alt="" height="100">-->
+<!--        <h1 class="h3 mb-3 fw-normal"><b>My App</b> - Sign up</h1>-->
+
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control" th:field="*{user.firstName}" id="firstname" placeholder="Firstname" required>-->
+<!--            <label>First name</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control" th:field="*{user.lastName}"id="lastname" placeholder="Last name" required>-->
+<!--            <label>Last name</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating">-->
+<!--            <input type="email" class="form-control" th:field="*{user.email}" id="username" placeholder="name@example.com" required>-->
+<!--            <label >Email address</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating">-->
+<!--            <input type="password" class="form-control" th:field="*{user.password}" id="password" placeholder="Password" required>-->
+<!--            <label>Password</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control" th:field="*{user.userType}" id="userType" placeholder="USER or ADMIN" required>-->
+<!--            <label>Usertype</label>-->
+<!--        </div>-->
+
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control" th:field="*{user.address}" id="address" placeholder="Address" required>-->
+<!--            <label>Address</label>-->
+<!--        </div>-->
+<!--        <div class="form-floating">-->
+<!--            <input type="text" class="form-control"  th:field="*{user.zipcode}" id="zipcode" placeholder="Zipcode" required>-->
+<!--            <label>Zipcode</label>-->
+<!--        </div>-->
+
+<!--        <td th:text="${userDto.message} ?: ''" />-->
+
+<!--        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign Up</button>-->
+<!--        <p class="mt-5 mb-3 text-muted"></p><a th:href="@{/}">Signin here</a></p>-->
+<!--    </form>-->
+<!--</main>-->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

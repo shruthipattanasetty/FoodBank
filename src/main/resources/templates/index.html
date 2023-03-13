@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Restaurant Page</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/addFood.css}" rel="stylesheet"/>
+
+</head>
+<!-- ----------- -->
+<title>W3.JS</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<!-- //------- -->
+
+
+<body style="overflow-y: scroll">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-mynav">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Restaurant Page</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fname" th:text="${user.firstName}+ ' ' + ${user.lastName}" role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid p-3">
+    <div class="card1">
+        <img class="p-2" th:src="@{/assets/foodbox.png}" id="avatar" width="200">
+        <div class="card-body">
+            <p class="card-text" id="username" th:text="${user.firstName} + ' ' + ${user.lastName}">...</p>
+
+
+        </div>
+        <div class="wel">
+            <h2 style="margin: auto;color: brown;">Welcome</h2>
+            <img src="https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6kh...SJrhFPmB...FwXs1M3EMoAJtlicohPRu9fg+ "
+                 class="max-width-100" width="350" height="150">
+        </div>
+    </div>
+
+    <div class="food-card">
+
+        <form class="container" th:action="@{/food/add-food/}+${user.id}" method="post">
+            <h4>Add Food</h4>
+            <select th:field="*{food.name}">
+                <option value="0">select menu</option>
+                <option th:each="option : ${menus}" th:value="${option.name}" th:text="${option.name}">-</option>
+            </select>
+
+            <br>
+
+            <label><b>Quantity</b></label>
+            <input type="text" id="qty" th:field="*{food.quantity}" size="20" required>
+            <button type="submit" class="btn">Add</button>
+
+            <p></p>
+            <p></p>
+            <p></p>
+        </form>
+        <h1 style="color:blue;" th:if="${foodDto != null }" th:text="${foodDto.message} ?: ''"/>
+    </div>
+
+</div>
+
+<h2 class="welcome">Food list</h2>
+
+<div class="table">
+    <table id="id01" class="w3-table-all">
+        <tr>
+            <th>ID</th>
+            <th>Food</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Picking Date</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+        <tr th:each="food1: ${foods}" style="height: 10px !important; overflow-y: scroll">
+            <td th:text="${food1.id}">{{id}}</td>
+            <td th:text="${food1.name}">{{id}}</td>
+            <td th:text="${food1.quantity}">{{id}}</td>
+            <td th:text="${food1.createdOn}">{{id}}</td>
+            <td th:text="${food1.blockedOn}">{{id}}</td>
+            <td th:text="${food1.status}">{{id}}</td>
+            <td>
+                <!--                <a th:href="@{/food/add-food/}+${user.id}+'/'+${f.name}" ><i class="fa fa-edit"></i></a>-->
+                <a th:href="@{/edit/}+${user.id}+'/'+${food1.id}" ><i class="fa fa-edit"></i></a>
+            </td>
+            <td>
+                <a th:href="@{/foods-delete-th/}+${food1.id}+'/'+${user.id}" method="GET"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-popup" id="myForm" >
+    <form th:action="@{/food/add-food/}+${user.id}+'/'+${food.id}" method="post" class="form-container">
+        <h1>Edit Food</h1>
+
+        <label><b>Food Name</b></label>
+        <input type="text"  th:field="*{food.name}" size="20" required>
+        <label><b>Quantity</b></label>
+        <input type="text"  th:field="*{food.quantity}" size="20" required>
+
+        <button type="submit" class="btn">Add</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+
+
+</body>
+
+</html>
