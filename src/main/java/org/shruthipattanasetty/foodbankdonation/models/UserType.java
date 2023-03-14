@@ -1,8 +1,8 @@
 package org.shruthipattanasetty.foodbankdonation.models;
 
 public enum UserType {
-    USER,
-    ADMIN,
+//    USER,
+//    ADMIN,
     RESTAURANT,
     VOLUNTEER
 }
